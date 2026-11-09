@@ -1,0 +1,12 @@
+Lab 13 — kernel semaphores: Observe answers
+
+1. One line costs 31 separate write() system calls (30 letters + newline);
+   with 3 CPUs the writes of the two processes interleave mid-line.
+2. sem_down(3) before the inner loop and sem_up(3) after it make the whole
+   line a critical section (semaphore 3 starts at 1 = a lock).
+3. while, not if: sem_up wakes EVERY process sleeping on the address; only one
+   wins the unit after re-acquiring the spinlock — the others find 0 again and
+   must sleep again.
+4. Sleeping while holding the spinlock would wedge the machine: sem_up must
+   acquire the same spinlock to add the unit, so it would spin forever and the
+   sleeper could never be woken. Hence: sleep_prepare, release, sleep.
