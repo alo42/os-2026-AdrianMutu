@@ -1,0 +1,12 @@
+Lab 10 — trace: Observe answers
+
+1. With mask 32 only read is printed because 32 = 2^5 and SYS_read = 5: the
+   condition (trace_mask >> num) & 1 is true only for call number 5. open (15)
+   and close (21) happen too, but their bits are 0 in the mask.
+2. The line np->trace_mask = p->trace_mask; in fork() — children inherit the
+   mask, so every pid in the forkforkfork tree prints its own fork lines.
+3. echo calls write twice: once for "hi" (write -> 2) and once for the newline
+   (write -> 1). The kernel prints the trace line right after the first write
+   returns — after "hi" is on screen, before echo writes the \n.
+4. open = 15 and close = 21, so the mask is 2^15 + 2^21 = 32768 + 2097152
+   = 2129920.
