@@ -25,7 +25,6 @@ char *sys_sbrk(int, int);
 int pause(int);
 int uptime(void);
 int sync(void);
-int trace(int);            // new
 int sem_init(int, int);    // new: id, start value
 int sem_down(int);         // new: take one, or sleep
 int sem_up(int);           // new: give one back

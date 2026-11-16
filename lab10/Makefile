@@ -18,7 +18,6 @@ OBJS = \
   $K/trap.o \
   $K/syscall.o \
   $K/sysproc.o \
-  $K/sem.o \
   $K/bio.o \
   $K/fs.o \
   $K/log.o \
@@ -133,13 +132,6 @@ mkfs/mkfs: mkfs/mkfs.c $K/fs.h $K/param.h
 UPROGS=\
 	$U/_cat\
 	$U/_echo\
-	$U/_sleep\
-	$U/_args\
-	$U/_mystat\
-	$U/_find\
-	$U/_run\
-	$U/_pingpong\
-	$U/_primes\
 	$U/_forktest\
 	$U/_grep\
 	$U/_init\
@@ -155,8 +147,6 @@ UPROGS=\
 	$U/_wc\
 	$U/_zombie\
 	$U/_trace\
-	$U/_semtest\
-	$U/_mix\
 	$U/_logstress\
 	$U/_forphan\
 	$U/_dorphan\

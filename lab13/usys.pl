@@ -43,7 +43,6 @@ entry("sbrk");
 entry("pause");
 entry("uptime");
 entry("sync");
-entry("trace");           # new
 entry("sem_init");        # new
 entry("sem_down");        # new
 entry("sem_up");          # new
