@@ -21,7 +21,7 @@
 #define SYS_mkdir  20
 #define SYS_close  21
 #define SYS_sync   22
-// 23 is kept for trace (Lab 10)
+#define SYS_trace 23 // new
 #define SYS_sem_init 24   // new
 #define SYS_sem_down 25   // new
 #define SYS_sem_up   26   // new
