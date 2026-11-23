@@ -1,0 +1,23 @@
+Lab 18 — A User-Level Thread Switch (xv6) — notes.txt
+
+Observe: What exactly does thread_switch save and load? Why is ra the
+register that makes execution continue in the other thread?
+
+thread_switch saves the callee-saved registers of the current thread into
+its struct context — ra (return address), sp (stack pointer) and s0..s11 —
+and then loads the same fourteen registers from the next thread's context.
+Only the callee-saved set must be preserved: the RISC-V calling convention
+says caller-saved registers (a0..a7, t0..t6) may be clobbered by any
+function call, so the compiler already assumes they are lost across the
+call to thread_switch; saving ra, sp, s0..s11 is therefore exactly enough.
+
+ra is the register that redirects execution. thread_switch ends with "ret",
+which is just "jump to the address in ra". Because we have replaced ra with
+the value saved by (or planted for) the OTHER thread, the ret does not go
+back to our own caller: it jumps into the other thread's code, with sp
+already pointing at that thread's own stack. For a thread that has run
+before, ra holds the return point inside its thread_schedule call, so it
+resumes exactly where it left off. For a brand-new thread, thread_create
+planted ra = the thread function and sp = the top of the thread's stack,
+so the very first switch "returns" into the function's first instruction.
+One instruction, ret, is the entire context switch.
